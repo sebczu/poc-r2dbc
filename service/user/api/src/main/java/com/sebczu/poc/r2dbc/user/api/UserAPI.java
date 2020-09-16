@@ -14,10 +14,10 @@ public interface UserAPI {
     Flux<User> list();
 
     @GetMapping(value = "/{id}", produces = APPLICATION_STREAM_JSON_VALUE)
-    Mono<User> getById(@PathVariable("id") Integer id);
+    Mono<User> get(@PathVariable("id") Integer id);
 
     @PostMapping(consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
-    Mono<User> save(@RequestBody User user);
+    Mono<User> create(@RequestBody User user);
 
     @PutMapping(value = "/{id}", consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
     Mono<User> update(@PathVariable("id") Integer id, @RequestBody User user);

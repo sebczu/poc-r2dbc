@@ -23,12 +23,12 @@ public class UserController implements UserAPI {
                 .map(entity -> new User(entity.getId(), entity.getName()));
     }
 
-    public Mono<User> getById(Integer id) {
+    public Mono<User> get(Integer id) {
         return repository.findById(id)
                 .map(entity -> new User(entity.getId(), entity.getName()));
     }
 
-    public Mono<User> save(User user) {
+    public Mono<User> create(User user) {
         return Mono.just(user)
                 .map(user1 -> new UserEntity(user1.getName()))
                 .flatMap(repository::save)
