@@ -1,5 +1,7 @@
 package com.sebczu.poc.r2dbc.user.controller;
 
+import com.sebczu.poc.r2dbc.user.api.UserAPI;
+import com.sebczu.poc.r2dbc.user.domain.User;
 import com.sebczu.poc.r2dbc.user.repository.UserRepository;
 import com.sebczu.poc.r2dbc.user.repository.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -9,39 +11,38 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
-import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON_VALUE;
-
 @RestController
-@RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserAPI {
 
     private final UserRepository repository;
 
-    @GetMapping(produces = APPLICATION_STREAM_JSON_VALUE)
-    public Flux<UserEntity> list() {
+    public Flux<User> list() {
         return repository.findAll()
-                .delayElements(Duration.ofMillis(100));
+                .delayElements(Duration.ofMillis(100))
+                .map(entity -> new User(entity.getId(), entity.getName()));
     }
 
-    @GetMapping(value = "/{id}", produces = APPLICATION_STREAM_JSON_VALUE)
-    public Mono<UserEntity> getById(@PathVariable("id") Integer id) {
-        return repository.findById(id);
+    public Mono<User> getById(Integer id) {
+        return repository.findById(id)
+                .map(entity -> new User(entity.getId(), entity.getName()));
     }
 
-    @PostMapping(consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
-    public Mono<UserEntity> save(@RequestBody UserEntity user) {
-        return repository.save(user);
+    public Mono<User> save(User user) {
+        return Mono.just(user)
+                .map(user1 -> new UserEntity(user1.getName()))
+                .flatMap(repository::save)
+                .map(entity -> new User(entity.getId(), entity.getName()));
     }
 
-    @PutMapping(value = "/{id}", consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
-    public Mono<UserEntity> save(@PathVariable("id") Integer id, @RequestBody UserEntity user) {
-        user.setId(id);
-        return repository.save(user);
+    public Mono<User> update(Integer id, User user) {
+        return Mono.just(user)
+                .map(user1 -> new UserEntity(id, user1.getName()))
+                .flatMap(repository::save)
+                .map(entity -> new User(id, entity.getName()));
     }
 
-    @DeleteMapping(value = "/{id}", produces = APPLICATION_STREAM_JSON_VALUE)
-    public Mono<Void> delete(@PathVariable Integer id) {
+    public Mono<Void> delete(Integer id) {
         return repository.deleteById(id);
     }
 }
