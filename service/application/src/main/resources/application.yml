@@ -1,3 +1,9 @@
 spring:
   application:
     name: poc-r2dbc
+
+management:
+  endpoints:
+    web:
+      exposure:
+        includ: "*"
