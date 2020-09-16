@@ -10,7 +10,7 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 
 @Configuration
 @EnableR2dbcRepositories
-public class R2DBCConnectionConfiguration extends AbstractR2dbcConfiguration {
+public class R2dbcConfiguration extends AbstractR2dbcConfiguration {
 
     @Bean
     @Override

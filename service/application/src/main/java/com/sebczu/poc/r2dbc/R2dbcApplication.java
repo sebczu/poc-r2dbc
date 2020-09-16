@@ -1,5 +1,7 @@
 package com.sebczu.poc.r2dbc;
 
+import com.sebczu.poc.r2dbc.user.repository.UserRepository;
+import com.sebczu.poc.r2dbc.user.repository.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,22 +13,22 @@ import java.util.Arrays;
 
 @Slf4j
 @SpringBootApplication
-public class R2DBCApplication {
+public class R2dbcApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(R2DBCApplication.class, args);
+        SpringApplication.run(R2dbcApplication.class, args);
     }
 
     @Bean
-    public CommandLineRunner demo(PlayerRepository repository) {
+    public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
 
             System.out.println("create table");
 
             // save a few customers
-            repository.saveAll(Arrays.asList(new Player("Jack1"),
-                    new Player("Jack2"),
-                    new Player("Jack3")))
+            repository.saveAll(Arrays.asList(new UserEntity("Jack1"),
+                    new UserEntity("Jack2"),
+                    new UserEntity("Jack3")))
                     .blockLast(Duration.ofSeconds(10));
 
             // fetch all customers
