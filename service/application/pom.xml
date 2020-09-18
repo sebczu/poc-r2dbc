@@ -3,12 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>application</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
 
   <parent>
     <groupId>com.sebczu.poc.r2dbc</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}${changelist}${sha1}</version>
     <relativePath>../parent</relativePath>
   </parent>
 

@@ -3,12 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>user-api</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
 
   <parent>
     <groupId>com.sebczu.poc.r2dbc</groupId>
     <artifactId>user</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}${changelist}${sha1}</version>
   </parent>
 
   <dependencies>

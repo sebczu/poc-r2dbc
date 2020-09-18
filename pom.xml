@@ -1,27 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sebczu.poc.r2dbc</groupId>
-    <artifactId>poc-r2dbc</artifactId>
+  <groupId>com.sebczu.poc.r2dbc</groupId>
+  <artifactId>poc-r2dbc</artifactId>
+  <version>${revision}${changelist}${sha1}</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.sebczu</groupId>
+    <artifactId>versioning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  </parent>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
 
-    <modules>
-        <module>service</module>
-    </modules>
+    <revision>0.0.1</revision>
+    <changelist/>
+    <sha1>-SNAPSHOT</sha1>
+  </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub sebczu Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/sebczu/maven</url>
-        </repository>
-    </distributionManagement>
+  <modules>
+    <module>service</module>
+  </modules>
 
 </project>
