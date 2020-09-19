@@ -20,6 +20,22 @@
       <groupId>com.sebczu.poc.r2dbc</groupId>
       <artifactId>user-repository</artifactId>
     </dependency>
+    <!--EXTERNAL TEST-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.r2dbc</groupId>
+      <artifactId>r2dbc-postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
 </project>

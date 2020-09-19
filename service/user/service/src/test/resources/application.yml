@@ -1,16 +1,8 @@
 spring:
-  application:
-    name: poc-r2dbc
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/test
     username: admin
     password: test
-
-management:
-  endpoints:
-    web:
-      exposure:
-        includ: "*"
 
 logging:
   level:
@@ -18,3 +10,4 @@ logging:
       springframework:
         data:
           r2dbc: DEBUG
+
