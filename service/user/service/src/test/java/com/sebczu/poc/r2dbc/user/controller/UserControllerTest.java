@@ -56,7 +56,7 @@ abstract class UserControllerTest {
         return databaseClient.insert().into(UserEntity.class)
                 .using(Flux.fromStream(users.stream()))
                 .fetch().all()
-                .map(user -> new UserEntity( (Integer) user.get("id"), (String) user.get("name")));
+                .map(user -> new UserEntity((Integer) user.get("id"), (String) user.get("name")));
     }
 
     protected Flux<UserEntity> getAllUsers() {
