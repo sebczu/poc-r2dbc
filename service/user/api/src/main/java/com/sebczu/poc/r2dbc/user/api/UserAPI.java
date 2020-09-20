@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON_VALUE;
 
 @RequestMapping("/users")
@@ -16,10 +17,10 @@ public interface UserAPI {
     @GetMapping(value = "/{id}", produces = APPLICATION_STREAM_JSON_VALUE)
     Mono<User> get(@PathVariable("id") Integer id);
 
-    @PostMapping(consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
+    @PostMapping(consumes = {APPLICATION_STREAM_JSON_VALUE, APPLICATION_JSON_VALUE}, produces = APPLICATION_STREAM_JSON_VALUE)
     Mono<User> create(@RequestBody User user);
 
-    @PutMapping(value = "/{id}", consumes = APPLICATION_STREAM_JSON_VALUE, produces = APPLICATION_STREAM_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = {APPLICATION_STREAM_JSON_VALUE, APPLICATION_JSON_VALUE}, produces = APPLICATION_STREAM_JSON_VALUE)
     Mono<User> update(@PathVariable("id") Integer id, @RequestBody User user);
 
     @DeleteMapping(value = "/{id}", produces = APPLICATION_STREAM_JSON_VALUE)

@@ -5,10 +5,16 @@ import com.sebczu.poc.r2dbc.user.repository.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 class ListUserControllerTest extends UserControllerTest {
+
+    private final static Function<List<User>, Iterable<? extends String>> NAME_EXTRACT = users -> users.stream()
+            .map(User::getName)
+            .collect(Collectors.toList());
 
     @Test
     void shouldFetchAllUsers() {
@@ -20,9 +26,8 @@ class ListUserControllerTest extends UserControllerTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(User.class)
-                .value(user -> user.size(), equalTo(2))
-                .value(user -> user.get(0).getName(), equalTo("John"))
-                .value(user -> user.get(1).getName(), equalTo("John2"));
+                .hasSize(2)
+                .value(NAME_EXTRACT, containsInAnyOrder("John", "John2"));
     }
 
 }

@@ -18,8 +18,7 @@ class DeleteUserControllerTest extends UserControllerTest {
         webClient.delete()
                 .uri(URL + "/{id}", user.getId())
                 .exchange()
-                .expectStatus().isOk()
-                .returnResult(String.class);
+                .expectStatus().isOk();
 
         StepVerifier
                 .create(getAllUsers())

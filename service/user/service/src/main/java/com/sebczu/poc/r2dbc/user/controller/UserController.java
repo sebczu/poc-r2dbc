@@ -54,6 +54,7 @@ public class UserController implements UserAPI {
 
     public Mono<Void> delete(Integer id) {
         log.info("delete user {}", id);
-        return repository.deleteById(id).log();
+        return repository.deleteById(id)
+                .log();
     }
 }

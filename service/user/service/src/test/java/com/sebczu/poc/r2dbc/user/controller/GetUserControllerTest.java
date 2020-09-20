@@ -1,6 +1,5 @@
 package com.sebczu.poc.r2dbc.user.controller;
 
-import com.sebczu.poc.r2dbc.user.domain.User;
 import com.sebczu.poc.r2dbc.user.repository.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +17,12 @@ class GetUserControllerTest extends UserControllerTest {
         UserEntity user = insertUsers(users).blockLast();
 
         webClient.get()
-                .uri(URL + "/{id}", user)
+                .uri(URL + "/{id}", user.getId())
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(User.class)
-                .value(u -> u.getId(), equalTo(user.getId()))
-                .value(u -> u.getName(), equalTo(user.getName()));
+                .expectBody()
+                .jsonPath("$.id").value(equalTo(user.getId()))
+                .jsonPath("$.name").value(equalTo(user.getName()));
     }
 
 }
