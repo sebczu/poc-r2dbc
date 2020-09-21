@@ -3,6 +3,7 @@ package com.sebczu.poc.r2dbc.user.controller;
 import com.sebczu.poc.r2dbc.user.repository.UserRepository;
 import com.sebczu.poc.r2dbc.user.repository.entity.UserEntity;
 import io.r2dbc.spi.ConnectionFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.List;
 
+@Slf4j
 @SpringBootTest
 @ContextConfiguration(initializers = {UserControllerTest.ContextInitializer.class})
 @AutoConfigureWebTestClient
@@ -66,6 +68,7 @@ abstract class UserControllerTest {
 
     static class ContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         public void initialize(ConfigurableApplicationContext applicationContext) {
+            log.info("context init");
             PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:13")
                     .withDatabaseName("test")
                     .withUsername("admin")
@@ -85,7 +88,7 @@ abstract class UserControllerTest {
     static class TestInitalizer {
         @Bean
         public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory) {
-
+            log.info("test init");
             ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
             initializer.setConnectionFactory(connectionFactory);
 
