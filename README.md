@@ -1,5 +1,5 @@
 ### **POC-R2DBC**
-**spring webflux + r2dbc + postgresql**
+**spring boot webflux + r2dbc + postgresql**
 
 #### 1. Run database and pgadmin
 /docker
