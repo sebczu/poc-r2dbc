@@ -13,9 +13,8 @@ mvn clean install
 ```
 
 #### 3. Run service
-/service/application 
 ```bash
-mvn spring-boot:run
+mvn clean install -Prun
 ```
 
 #### 4. Health check
