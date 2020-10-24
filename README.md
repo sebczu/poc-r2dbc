@@ -7,14 +7,14 @@
 docker-compose up
 ```
 
-#### 2. Build package
+#### 2. Build service
 ```bash
 mvn clean install
 ```
 
 #### 3. Run service
 ```bash
-mvn clean install -Prun
+mvn clean package -Prun
 ```
 
 #### 4. Health check
