@@ -89,11 +89,11 @@ abstract class UserControllerTest {
         @Bean
         public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory) {
             log.info("test init");
-            ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
-            initializer.setConnectionFactory(connectionFactory);
-
             CompositeDatabasePopulator populator = new CompositeDatabasePopulator();
             populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("schema.sql")));
+
+            ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
+            initializer.setConnectionFactory(connectionFactory);
             initializer.setDatabasePopulator(populator);
 
             return initializer;
